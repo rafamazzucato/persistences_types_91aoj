@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistences_types/floor/screens/list_books.dart';
 import 'package:persistences_types/home.dart';
 
 void main() {
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        "/" :(context) => HomeWidget()
+        "/" :(context) => HomeWidget(),
+        "/books":(context) => const ListBooksWidget()
       },
       initialRoute: "/",
     );
