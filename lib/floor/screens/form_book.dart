@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistences_types/floor/models/book.dart';
 
 class BookFormWidget extends StatelessWidget {
   BookFormWidget({super.key});
@@ -47,7 +48,8 @@ class BookFormWidget extends StatelessWidget {
                               child: const Text("Salvar"), onPressed: () {
                                 if(_formKey.currentState != null 
                                   &&_formKey.currentState!.validate()){
-                                    
+                                    Book book = Book(_nameController.text, _authorController.text);
+                                    Navigator.pop(context, book);
                                 }
                               }))
                     ]))));
