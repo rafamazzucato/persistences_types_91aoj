@@ -1,8 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:persistences_types/firebase/screens/list_cars.dart';
 import 'package:persistences_types/floor/screens/list_books.dart';
 import 'package:persistences_types/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -20,7 +24,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/" :(context) => HomeWidget(),
-        "/books":(context) => const ListBooksWidget()
+        "/books":(context) => const ListBooksWidget(),
+        "/cars": (context) => const ListCarsWidget()
       },
       initialRoute: "/",
     );
