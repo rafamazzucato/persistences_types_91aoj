@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persistences_types/firebase/models/car.dart';
 
@@ -7,6 +8,10 @@ class FormCarWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _marcaController = TextEditingController();
   final _modeloController = TextEditingController();
+
+  _insertCar(Car c) async{
+    await FirebaseFirestore.instance.collection("cars").add(c.toJson());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +52,8 @@ class FormCarWidget extends StatelessWidget {
                   onPressed: (){
                     if(_formKey.currentState!.validate()){
                       final car = Car(_marcaController.text, _modeloController.text);
-                      Navigator.pop(context, car);
+                      _insertCar(car);
+                      Navigator.pop(context);
                     }
                   }))
             ]))),

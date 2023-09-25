@@ -37,8 +37,10 @@ class _ListCarsWidgetState extends State<ListCarsWidget> {
       stream: FirebaseFirestore.instance.collection("cars").snapshots(),
       builder: (context, snapshot){
         if(!snapshot.hasData) return const LinearProgressIndicator();
-        if(snapshot.data == null){
-          return const Text("Nenhum carro encontrado!");
+        if(snapshot.data == null || snapshot.data!.size == 0){
+          return const Center(
+            child: Text("Nenhum carro encontrado!"),
+          );
         }else{
           return buildListView(context, snapshot.data!.docs);
         }
@@ -57,8 +59,8 @@ class _ListCarsWidgetState extends State<ListCarsWidget> {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: ListItemWidget(leading: "", title: c.marca, subtitle: 
-        c.modelo,onLongPress: (){
-
+        c.modelo,onLongPress: () async{
+          await data.reference.delete();
         }));
   }
 }
